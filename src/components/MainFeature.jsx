@@ -253,9 +253,9 @@ const dogBreeds = [
       "They're known for their natural lifesaving abilities and have been known to save people from drowning."
     ],
     verified: true
-    ],
-    verified: true
   },
+  {
+    id: "stbernard-23",
     name: "Saint Bernard",
     image: "https://images.unsplash.com/photo-1516209348-87f377ec211d?auto=format&fit=crop&q=80&w=600",
     facts: [
