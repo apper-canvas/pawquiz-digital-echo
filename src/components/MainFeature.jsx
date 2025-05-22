@@ -323,7 +323,7 @@ const dogBreeds = [
   {
     id: "frenchie-29",
     name: "French Bulldog",
-    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dd8?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80&w=600",
     facts: [
       "French Bulldogs were developed in England as miniature Bulldogs before becoming popular in France.",
       "Their bat-like ears are one of their most distinctive features.",
@@ -345,7 +345,7 @@ const dogBreeds = [
   {
     id: "stbernard-31",
     name: "Saint Bernard",
-    image: "https://images.unsplash.com/photo-1551730459-92db2a308f21?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Saint Bernards can weigh up to 180 pounds, making them one of the heaviest dog breeds.",
       "They were named after the Great St. Bernard Pass in the Swiss Alps.",
@@ -543,7 +543,7 @@ const dogBreeds = [
   {
     id: "akitas-49",
     name: "Akita Inu",
-    image: "https://images.unsplash.com/photo-1478098711619-5ab0b478d6dc?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1526250295387-a9b93f39eb53?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Akitas originated in the mountains of northern Japan.",
       "In Japan, they're considered symbols of good health, happiness, and long life.",
