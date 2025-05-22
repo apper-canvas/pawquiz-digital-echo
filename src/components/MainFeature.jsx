@@ -196,7 +196,7 @@ const MainFeature = ({ onQuizComplete }) => {
         quiz: { correctBreed: nextCorrectBreed, options: nextAllOptions, fact: getRandomFact(nextCorrectBreed.facts) },
         confidence: nextRandomConfidence
       });
-    });
+      }
   };
 
 
@@ -239,6 +239,15 @@ const MainFeature = ({ onQuizComplete }) => {
         // Get verified incorrect options
         const otherBreeds = breedsToUse.filter(breed => breed.id !== correctBreed.id);
         const incorrectOptions = getRandomElements(otherBreeds, 3, correctBreed);
+        const allOptions = [...incorrectOptions];
+        const correctPosition = Math.floor(Math.random() * 4);
+        allOptions.splice(correctPosition, 0, correctBreed);
+        
+        // Generate a random confidence score between 70 and 99
+        const randomConfidence = Math.floor(Math.random() * 30) + 70;
+        
+        setCurrentQuiz({
+          correctBreed,
           options: allOptions,
           fact: getRandomFact(correctBreed.facts)
         });
@@ -247,15 +256,6 @@ const MainFeature = ({ onQuizComplete }) => {
         preloadNextQuiz();
       }
       setSelectedAnswer(null);
-      
-      // Create final quiz object with correct options
-      if (correctBreed) {
-        const allOptions = [...incorrectOptions];
-        const correctPosition = Math.floor(Math.random() * 4);
-        allOptions.splice(correctPosition, 0, correctBreed);
-        
-        setCurrentQuiz({ correctBreed, options: allOptions, fact: getRandomFact(correctBreed.facts) });
-      }
       setLoading(false);
     }, 1000);
   };
@@ -337,8 +337,12 @@ const MainFeature = ({ onQuizComplete }) => {
     validateAllBreeds();
   }, []);
 
-    preloadNextQuiz();
-  }, []);
+  // Generate initial quiz when component mounts and validatedBreeds changes
+  useEffect(() => {
+    if (validatedBreeds.length > 0 || dogBreeds.length > 0) {
+      generateQuiz();
+    }
+  }, [validatedBreeds]);
 
   return (
     <div className="mx-auto max-w-4xl">
