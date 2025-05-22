@@ -144,7 +144,6 @@ const dogBreeds = [
     ],
     verified: true
   },
-  },
   {
     id: "rott-13",
     name: "Rottweiler",
