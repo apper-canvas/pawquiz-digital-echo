@@ -323,7 +323,7 @@ const dogBreeds = [
   {
     id: "frenchie-29",
     name: "French Bulldog",
-    image: "https://images.unsplash.com/photo-1575425186775-b8de9a427e67?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600",
     facts: [
       "French Bulldogs were developed in England as miniature Bulldogs before becoming popular in France.",
       "Their bat-like ears are one of their most distinctive features.",
@@ -683,16 +683,40 @@ const verifyDogImage = (img) => {
   return new Promise((resolve) => {
     // For a real implementation, this would call an API that uses ML to verify dog breeds
     // For now, we'll use some heuristics to do basic validation
-    
-    // Check if image has loaded properly with reasonable dimensions
-    if (img.width < 10 || img.height < 10) {
+
+    // Check for invalid dimensions
+    if (img.width < 50 || img.height < 50) {
+      console.warn("Image has invalid dimensions - likely not a dog image");
       resolve(false);
       return;
     }
     
-    // In a real implementation, we would analyze the image content here
-    // For now, we'll assume all properly loaded images are valid dog breeds
-    
+    // Check aspect ratio - most dog photos have reasonable aspect ratios
+    const aspectRatio = img.width / img.height;
+    if (aspectRatio < 0.5 || aspectRatio > 2.0) {
+      console.warn("Image has unusual aspect ratio - might not be a dog image");
+      // Don't reject solely on aspect ratio, but flag it as suspicious
+    }
+
+    // Check if image is unnaturally perfectly square (often placeholders)
+    const isPerfectSquare = img.width === img.height;
+    const isCommonPlaceholderSize = img.width === 100 || img.width === 200 || img.width === 300;
+    if (isPerfectSquare && isCommonPlaceholderSize) {
+      console.warn("Image appears to be a placeholder or generic image");
+      resolve(false);
+      return;
+    }
+
+    // Check for extremely small file size (might be a placeholder)
+    // This is approximated by checking if the image renders quickly
+    // In a real implementation, we would check actual file size or use ML
+    if (img.complete && img.naturalWidth === 0) {
+      console.warn("Image failed to load properly - not a valid dog image");
+      resolve(false);
+      return;
+    }
+
+    // Image passed basic validation
     resolve(true);
   });
 };
