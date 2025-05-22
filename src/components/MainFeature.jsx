@@ -197,6 +197,7 @@ const MainFeature = ({ onQuizComplete }) => {
         confidence: nextRandomConfidence
       });
       }
+    }
   };
 
 
@@ -205,7 +206,7 @@ const MainFeature = ({ onQuizComplete }) => {
     setLoading(true);
     
     // Simulate API/model loading time
-    setTimeout(() => {
+    setTimeout(async () => {
       if (nextQuizData) {
         // Use the preloaded quiz data
         setCurrentQuiz(nextQuizData.quiz);
