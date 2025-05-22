@@ -924,12 +924,13 @@ const MainFeature = ({ onQuizComplete }) => {
         breed => !recentlyShownBreeds.includes(breed.id)
       );
       
+      // Determine which breed pool to use
+      let breedPool = nonRepeatingBreeds.length >= 4 ? nonRepeatingBreeds : unusedBreeds;
+      if (unusedBreeds.length < 10) {
+        console.log("Low on unused breeds, considering all breeds");
         breedPool = nonRepeatingBreeds;
       }
       
-      // Get a random breed for the next question that hasn't been used recently
-      // Filter out the most recently shown breed to prevent immediate repetition
-      breedPool = breedPool.filter(breed => !recentlyShownBreeds.includes(breed.id));
       const nextCorrectBreed = breedPool[Math.floor(Math.random() * breedPool.length)];
       
       const imageResult = await preloadImage(nextCorrectBreed.image || nextCorrectBreed.validatedImage, nextCorrectBreed.name);
@@ -1023,6 +1024,9 @@ const MainFeature = ({ onQuizComplete }) => {
           });
         }
       }
+    } catch (error) {
+      console.error("Error in preloading next quiz:", error);
+      // Silently handle the error to prevent app crashes
     } catch (error) {
       console.error("Error in preloading next quiz:", error);
     }
