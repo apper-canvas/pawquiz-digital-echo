@@ -143,7 +143,7 @@ const dogBreeds = [
       "Australian Shepherds are highly energetic and excel at dog sports like agility and frisbee."
     ],
     verified: true
-  }
+  },
   {
     id: "rott-13",
     name: "Rottweiler",
