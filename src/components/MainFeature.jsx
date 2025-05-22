@@ -245,6 +245,14 @@ const dogBreeds = [
   },
   {
     id: "newfoundland-22",
+    name: "Newfoundland",
+    image: "https://images.unsplash.com/photo-1560392290-a86bca8a8783?auto=format&fit=crop&q=80&w=600",
+    facts: [
+      "Newfoundlands have webbed feet and a water-resistant coat, making them excellent swimmers.",
+      "They were bred as working dogs for fishermen in Newfoundland, Canada.",
+      "They're known for their natural lifesaving abilities and have been known to save people from drowning."
+    ],
+    verified: true
   {
     id: "saint-23",
     name: "Saint Bernard",
@@ -719,9 +727,6 @@ for (let i = allDogBreeds.length + 1; i <= 150; i++) {
   });
 }
 
-
-}
-
 // Helper function to get random elements from an array
 const getRandomElements = (array, count, exclude = null) => {
   // Create a truly random shuffle for better variety
@@ -918,23 +923,6 @@ const MainFeature = ({ onQuizComplete }) => {
         breed => !recentlyShownBreeds.includes(breed.id)
       );
       
-      // Additionally filter out breeds that were recently shown to prevent immediate repetition
-      let breedPool = unusedBreeds;
-      if (unusedBreeds.length < 10) {
-        console.log("Resetting used breeds pool to allow new cycle");
-        setUsedBreedIds(new Set());
-        breedPool = breedsToUse;
-      }
-
-      // Use non-repeating breeds if we have enough, otherwise use the regular pool
-      if (nonRepeatingBreeds.length >= 4) {
-        breedPool = nonRepeatingBreeds;
-      }
-
-      // Filter out the most recently shown breeds to prevent immediate repetition
-
-      // Use non-repeating breeds if we have enough, otherwise use the regular pool
-      if (nonRepeatingBreeds.length >= 4) {
         breedPool = nonRepeatingBreeds;
       }
       
@@ -943,14 +931,6 @@ const MainFeature = ({ onQuizComplete }) => {
       breedPool = breedPool.filter(breed => !recentlyShownBreeds.includes(breed.id));
       const nextCorrectBreed = breedPool[Math.floor(Math.random() * breedPool.length)];
       
-      // Preload the image and verify it matches the breed
-          // Add to recently shown breeds queue and maintain queue size
-          setRecentlyShownBreeds(prev => {
-            const updated = [nextCorrectBreed.id, ...prev].slice(0, 5);
-            return updated;
-          });
-          
-          // Create a verification key for this quiz question
       const imageResult = await preloadImage(nextCorrectBreed.image || nextCorrectBreed.validatedImage, nextCorrectBreed.name);
       
       // Only proceed if image loaded successfully
@@ -1094,24 +1074,12 @@ const MainFeature = ({ onQuizComplete }) => {
           );
           
           // Additionally filter out breeds that were recently shown
-          let breedPool = nonRepeatingBreeds.length >= 4 ? nonRepeatingBreeds : unusedBreeds;
+          let breedPool = nonRepeatingBreeds.length >= 4 ? nonRepeatingBreeds : unusedBreeds; 
           if (unusedBreeds.length < 10) {
             console.log("Resetting used breeds pool to allow new cycle");
             setUsedBreedIds(new Set());
+            // Reset to all available breeds
             breedPool = breedsToUse;
-          }
-          
-          // If we've used most breeds, reset the used breeds to allow a new cycle
-          let breedPool = nonRepeatingBreeds.length >= 4 ? nonRepeatingBreeds : unusedBreeds;
-          if (unusedBreeds.length < 10) {
-            console.log("Resetting used breeds pool to allow new cycle");
-          // Add to recently shown breeds queue and maintain queue size
-          setRecentlyShownBreeds(prev => {
-            const updated = [correctBreed.id, ...prev].slice(0, 5);
-            return updated;
-          });
-          
-            setUsedBreedIds(new Set());
             breedPool = breedsToUse;
           }
           
