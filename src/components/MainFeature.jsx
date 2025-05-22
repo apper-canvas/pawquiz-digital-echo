@@ -323,7 +323,7 @@ const dogBreeds = [
   {
     id: "frenchie-29",
     name: "French Bulldog",
-    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1575425186775-b8de9a427e67?auto=format&fit=crop&q=80&w=600",
     facts: [
       "French Bulldogs were developed in England as miniature Bulldogs before becoming popular in France.",
       "Their bat-like ears are one of their most distinctive features.",
@@ -345,7 +345,7 @@ const dogBreeds = [
   {
     id: "stbernard-31",
     name: "Saint Bernard",
-    image: "https://images.unsplash.com/photo-1561363702-e07252da3399?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1551730459-92db2a308f21?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Saint Bernards can weigh up to 180 pounds, making them one of the heaviest dog breeds.",
       "They were named after the Great St. Bernard Pass in the Swiss Alps.",
@@ -394,7 +394,7 @@ const dogBreeds = [
       "Weimaraners were originally bred for hunting large game like bears and wolves.",
       "They're nicknamed 'the Gray Ghost' due to their distinctive silver-gray coat.",
       "The breed was created exclusively for the nobility of the Weimar Republic in Germany."
-    ],
+    image: "https://images.unsplash.com/photo-1549619856-ac562a3ed1a3?auto=format&fit=crop&q=80&w=600",
     verified: true
   },
   {
@@ -427,7 +427,7 @@ const dogBreeds = [
       "Brittanys were developed in the Brittany region of France in the 17th century.",
       "They're often called Brittany Spaniels, though they're more closely related to setters than spaniels.",
       "Brittanys are known for their high energy and exceptional hunting abilities."
-    ],
+    image: "https://images.unsplash.com/photo-1591946614720-90a587da4a36?auto=format&fit=crop&q=80&w=600",
     verified: true
   },
   {
@@ -478,7 +478,7 @@ const dogBreeds = [
     id: "dane-43",
     name: "Great Dane",
     image: "https://images.unsplash.com/photo-1592754345493-e41e8be9488c?auto=format&fit=crop&q=80&w=600",
-    facts: [
+    image: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=600",
       "Great Danes were originally bred to hunt wild boar.",
       "Despite their name, they were developed in Germany, not Denmark.",
       "The term 'apartment-friendly' was never used to describe Great Danes, yet they're known for being relatively inactive indoors."
@@ -501,7 +501,7 @@ const dogBreeds = [
     name: "Irish Wolfhound",
     image: "https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?auto=format&fit=crop&q=80&w=600",
     facts: [
-      "Irish Wolfhounds are the tallest of all dog breeds, standing up to 35 inches at the shoulder.",
+    image: "https://images.unsplash.com/photo-1532598187460-98fe8826d1e8?auto=format&fit=crop&q=80&w=600",
       "They were originally bred to hunt wolves in Ireland, hence their name.",
       "Despite their imposing size, they're known for their gentle, friendly temperament."
     ],
@@ -550,7 +550,7 @@ const dogBreeds = [
       "The famous Akita named Hachiko waited for his deceased owner at a train station every day for nine years until his own death."
     ],
     verified: true
-  },
+    image: "https://images.unsplash.com/photo-1583512603805-3cc6b41e3362?auto=format&fit=crop&q=80&w=600",
   {
     id: "bernese-50",
     name: "Bernese Mountain Dog",
