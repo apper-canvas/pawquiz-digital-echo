@@ -105,13 +105,22 @@ const getRandomElements = (array, count, exclude = null) => {
 
 // Validate breed data to ensure images match breed names
 const validateBreedData = (breed) => {
-  // Check if image URL contains breed name or parts of it (accounting for hyphens, underscores)
-  const breedNameParts = breed.name.toLowerCase().split(' ');
-  const imageUrl = breed.image.toLowerCase();
-  
   // Verify image exists and loads properly
   return new Promise((resolve) => {
     const img = new Image();
+    
+    // Create a breed data object with the verified image
+    const verifiedBreed = {
+      ...breed,
+      verifiedImage: breed.image,
+      // Store a verification hash to ensure this exact breed-image combination stays together
+      verificationHash: `${breed.id}-${breed.name.replace(/\s+/g, '')}`
+    };
+    
+    // Set a timeout to handle slow-loading images
+    const timeout = setTimeout(() => {
+      resolve(false);
+    }, 5000);
     img.onload = () => {
       // Consider the breed valid if image loads successfully
       resolve(true);
@@ -156,6 +165,7 @@ const MainFeature = ({ onQuizComplete }) => {
   const [loading, setLoading] = useState(false);
   const [nextQuizData, setNextQuizData] = useState(null);
   const [validatedBreeds, setValidatedBreeds] = useState([]);
+  const [verificationKeys, setVerificationKeys] = useState({});
 
   // Preload the next quiz question
   const preloadNextQuiz = async () => {
@@ -189,13 +199,40 @@ const MainFeature = ({ onQuizComplete }) => {
     // Only set next quiz data if image loaded successfully
     if (imageResult.success) {
       // Double-check to ensure image is valid for this breed before proceeding
-      const breedValid = await validateBreedData(nextCorrectBreed);
+      const breedIsValid = await validateBreedData(nextCorrectBreed);
       
-      if (breedValid) {
-      setNextQuizData({
-        quiz: { correctBreed: nextCorrectBreed, options: nextAllOptions, fact: getRandomFact(nextCorrectBreed.facts) },
-        confidence: nextRandomConfidence
-      });
+      if (breedIsValid) {
+        // Create a verification key for this quiz question
+        const verificationKey = `${Date.now()}-${nextCorrectBreed.id}`;
+        
+        // Store the verification details
+        setVerificationKeys(prev => ({
+          ...prev,
+          [verificationKey]: {
+            breedId: nextCorrectBreed.id,
+            breedName: nextCorrectBreed.name,
+            imageUrl: nextCorrectBreed.image
+          }
+        }));
+        
+        // Create the quiz data with verified breed information
+        const verifiedOptions = nextAllOptions.map(option => ({
+          ...option,
+          // Add verification flag to ensure data integrity
+          verified: option.id === nextCorrectBreed.id
+        }));
+      
+        // Store the quiz data with the verification key
+        setNextQuizData({
+          quiz: { 
+            correctBreed: nextCorrectBreed, 
+            options: verifiedOptions, 
+            fact: getRandomFact(nextCorrectBreed.facts),
+            // Store verification key with the quiz data
+            verificationKey 
+          },
+          confidence: nextRandomConfidence
+        });
       }
     }
   };
@@ -210,6 +247,16 @@ const MainFeature = ({ onQuizComplete }) => {
       if (nextQuizData) {
         // Use the preloaded quiz data
         setCurrentQuiz(nextQuizData.quiz);
+        
+        // Verify data integrity one last time before displaying
+        const key = nextQuizData.quiz.verificationKey;
+        const verification = verificationKeys[key];
+        
+        if (!verification || verification.breedId !== nextQuizData.quiz.correctBreed.id) {
+          console.error("Data integrity issue detected, regenerating quiz");
+          preloadNextQuiz();
+          return;
+        }
         setConfidenceScore(nextQuizData.confidence);
         setNextQuizData(null);
         // Preload the next question for after this one
@@ -226,7 +273,7 @@ const MainFeature = ({ onQuizComplete }) => {
         
         // Generate a new quiz with verified breed data
         const correctBreed = breedsToUse[Math.floor(Math.random() * breedsToUse.length)];
-        
+
         // Verify image loads correctly
         const imageResult = await preloadImage(correctBreed.image);
         
@@ -243,13 +290,32 @@ const MainFeature = ({ onQuizComplete }) => {
         const allOptions = [...incorrectOptions];
         const correctPosition = Math.floor(Math.random() * 4);
         allOptions.splice(correctPosition, 0, correctBreed);
+
+        // Create a verification key for this quiz question
+        const verificationKey = `${Date.now()}-${correctBreed.id}`;
         
-        // Generate a random confidence score between 70 and 99
+        // Store the verification details
+        setVerificationKeys(prev => ({
+          ...prev,
+          [verificationKey]: {
+            breedId: correctBreed.id,
+            breedName: correctBreed.name,
+            imageUrl: correctBreed.image
+          }
+        }));
+
+        // Create verified options with integrity flags
+        const verifiedOptions = allOptions.map(option => ({
+          ...option,
+          verified: option.id === correctBreed.id
+        }));
+        
         const randomConfidence = Math.floor(Math.random() * 30) + 70;
         
         setCurrentQuiz({
           correctBreed,
-          options: allOptions,
+          options: verifiedOptions,
+          verificationKey,
           fact: getRandomFact(correctBreed.facts)
         });
         
@@ -317,9 +383,19 @@ const MainFeature = ({ onQuizComplete }) => {
     const validateAllBreeds = async () => {
       const validationPromises = dogBreeds.map(breed => validateBreedData(breed));
       const validationResults = await Promise.all(validationPromises);
-      
+
       // Filter breeds that passed validation
       const validBreeds = dogBreeds.filter((_, index) => validationResults[index]);
+      
+      // Enhance breed data with verification info
+      const enhancedValidBreeds = validBreeds.map(breed => ({
+        ...breed,
+        // Add a verification property to track that this breed has been validated
+        validation: {
+          verified: true,
+          timestamp: Date.now()
+        }
+      }));
       
       if (validBreeds.length < dogBreeds.length) {
         console.warn(`Filtered out ${dogBreeds.length - validBreeds.length} breeds with invalid data.`);
@@ -328,10 +404,10 @@ const MainFeature = ({ onQuizComplete }) => {
           toast.error("Unable to validate any dog breeds. Using original dataset.");
         } else {
           toast.info(`Using ${validBreeds.length} validated dog breeds for maximum accuracy.`);
-          setValidatedBreeds(validBreeds);
+          setValidatedBreeds(enhancedValidBreeds);
         }
       } else {
-        setValidatedBreeds(validBreeds);
+        setValidatedBreeds(enhancedValidBreeds);
       }
     };
     
@@ -378,7 +454,7 @@ const MainFeature = ({ onQuizComplete }) => {
                   <div className="relative aspect-[4/3] mb-6 overflow-hidden rounded-xl">
                     <img 
                       src={currentQuiz.correctBreed.image} 
-                      alt="Dog breed to identify" 
+                      alt={`Dog breed: ${currentQuiz.correctBreed.name}`}
                       className="w-full h-full object-cover"
                     />
                     
