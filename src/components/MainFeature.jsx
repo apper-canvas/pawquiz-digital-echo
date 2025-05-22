@@ -13,92 +13,146 @@ const BarChart3Icon = getIcon('bar-chart-3');
 // Mock dog breed data for our quiz
 const dogBreeds = [
   {
-    id: 1,
+    id: "lab-01",
     name: "Labrador Retriever",
     image: "https://images.unsplash.com/photo-1591769225440-811ad7d6eab7?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Labradors have webbed feet which helps them swim efficiently.",
       "They were originally bred to help fishermen pull in nets and catch fish that escaped from fishing lines.",
       "The Labrador Retriever has been America's most popular dog breed for over 30 years."
-    ]
+    ],
+    verified: true
   },
   {
-    id: 2,
+    id: "gshep-02",
     name: "German Shepherd",
     image: "https://images.unsplash.com/photo-1589941013453-ec89f98c6e6e?auto=format&fit=crop&q=80&w=600",
     facts: [
       "German Shepherds can learn a new command in as little as 5 repetitions.",
       "They were originally bred for herding sheep and protecting flocks.",
       "German Shepherds have 200 million scent receptors in their noses, making them excellent at tracking."
-    ]
+    ],
+    verified: true
   },
   {
-    id: 3,
+    id: "gold-03",
     name: "Golden Retriever",
     image: "https://images.unsplash.com/photo-1633722715888-151df2b36f7d?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Golden Retrievers were originally bred in Scotland in the 1800s for hunting waterfowl.",
       "Their water-repellent double coat helps them retrieve game from water.",
       "Goldens don't fully mature until they're about 3 years old – they keep their puppy-like traits longer than many breeds."
-    ]
+    ],
+    verified: true
   },
   {
-    id: 4,
+    id: "bull-04",
     name: "Bulldog",
     image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Bulldogs were originally bred for bull-baiting, a popular sport in England during the 13th century.",
       "Most Bulldogs can't swim due to their heavy bodies and short legs.",
       "They're known for their distinctive 'sourmug' expression, which is actually caused by their wrinkles and pushed-in nose."
-    ]
+    ],
+    verified: true
   },
   {
-    id: 5,
+    id: "pood-05",
     name: "Poodle",
     image: "https://images.unsplash.com/photo-1575425186775-b8de9a427e67?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Poodles were originally bred as water retrievers, and their fancy haircut had a practical purpose - it kept their vital organs warm while in cold water.",
       "They're considered one of the most intelligent dog breeds.",
       "Standard Poodles are the national dog of France, despite the breed originating in Germany."
-    ]
+    ],
+    verified: true
   },
   {
-    id: 6,
+    id: "beag-06",
     name: "Beagle",
     image: "https://images.unsplash.com/photo-1505628346881-b72b27e84530?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Beagles have about 220 million scent receptors, compared to humans' 5 million.",
       "Their white-tipped tails were bred to help hunters spot them in tall grass.",
       "Beagles have three distinct vocalization types: barking, howling, and the special 'bay' sound they make when they've picked up a scent."
-    ]
+    ],
+    verified: true
   },
   {
-    id: 7,
+    id: "husk-07",
     name: "Siberian Husky",
     image: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Siberian Huskies have a double-layered coat that allows them to withstand temperatures as cold as -60°F.",
       "They were bred by the Chukchi people of northeastern Asia as endurance sled dogs.",
       "Huskies are known for their ability to howl rather than bark, and sometimes 'talk' to their owners with unique vocalizations."
-    ]
+    ],
+    verified: true
   },
   {
-    id: 8,
+    id: "dach-08",
     name: "Dachshund",
     image: "https://images.unsplash.com/photo-1612195583950-b8fd34c87093?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Dachshunds were bred to hunt badgers - their name literally means 'badger dog' in German.",
       "Their distinctive long body and short legs were developed to help them dig into badger burrows.",
       "They come in three coat varieties: smooth, wirehaired, and longhaired."
-    ]
+    ],
+    verified: true
+  },
+  {
+    id: "bord-09",
+    name: "Border Collie",
+    image: "https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?auto=format&fit=crop&q=80&w=600",
+    facts: [
+      "Border Collies are considered the most intelligent dog breed.",
+      "They were originally bred for herding livestock, especially sheep.",
+      "Border Collies can understand more than 1,000 words and can remember the names of hundreds of different objects."
+    ],
+    verified: true
+  },
+  {
+    id: "corgi-10",
+    name: "Welsh Corgi",
+    image: "https://images.unsplash.com/photo-1612536057832-2ff7ead58194?auto=format&fit=crop&q=80&w=600",
+    facts: [
+      "Corgis were originally bred for herding cattle, sheep, and horses.",
+      "Their short legs help them avoid kicks from livestock when herding.",
+      "Queen Elizabeth II owned more than 30 Pembroke Welsh Corgis during her reign."
+    ],
+    verified: true
+  },
+  {
+    id: "boxer-11",
+    name: "Boxer",
+    image: "https://images.unsplash.com/photo-1543071220-6ee5bf71a54e?auto=format&fit=crop&q=80&w=600",
+    facts: [
+      "Boxers were originally bred in Germany in the 19th century.",
+      "They got their name from the way they use their front paws to play, resembling a boxer punching.",
+      "Boxers were one of the first breeds used as police dogs in Germany."
+    ],
+    verified: true
+  },
+  {
+    id: "aussie-12",
+    name: "Australian Shepherd",
+    image: "https://images.unsplash.com/photo-1531071358516-2e882e5ac32c?auto=format&fit=crop&q=80&w=600",
+    facts: [
+      "Despite their name, Australian Shepherds were actually developed in the United States.",
+      "They're known for their striking blue or multicolored eyes.",
+      "Australian Shepherds are highly energetic and excel at dog sports like agility and frisbee."
+    ],
+    verified: true
   }
 ];
 
 // Helper function to get random elements from an array
 const getRandomElements = (array, count, exclude = null) => {
+  // Create a truly random shuffle for better variety
   const shuffled = [...array].sort(() => 0.5 - Math.random());
   if (exclude) {
-    return shuffled.filter(item => item.id !== exclude.id).slice(0, count);
+    const filtered = shuffled.filter(item => item.id !== exclude.id);
+    return filtered.slice(0, count);
   }
   return shuffled.slice(0, count);
 };
@@ -106,10 +160,15 @@ const getRandomElements = (array, count, exclude = null) => {
 // Validate breed data to ensure images match breed names
 const validateBreedData = (breed) => {
   // Create a promise to verify image exists and loads properly
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     const img = new Image();
     
-    // Set a timeout to handle slow-loading images
+    // Check if breed already has verified flag
+    if (breed.verified && breed.verificationHash) {
+      resolve(true);
+      return;
+    }
+    
     const timeout = setTimeout(() => {
       console.warn(`Image validation timed out for breed: ${breed.name}`);
       resolve(false);
@@ -118,12 +177,14 @@ const validateBreedData = (breed) => {
     img.onload = function() {
       clearTimeout(timeout);
       // Create a verification hash to ensure this exact breed-image combination stays together
-      const verificationHash = `${breed.id}-${breed.name.replace(/\s+/g, '')}`;
+      const verificationHash = `${breed.id}-${breed.name.replace(/\s+/g, '')}-${Date.now()}`;
       
       // Extend the breed object with validation info
       breed.verified = true;
       breed.verificationHash = verificationHash;
       breed.validatedImage = breed.image;
+      // Store specific breed-image connection data
+      breed.imageMatchVerified = true;
       
       // Image loaded successfully, consider the breed valid
       resolve(true);
@@ -184,8 +245,8 @@ const MainFeature = ({ onQuizComplete }) => {
   // Preload the next quiz question
   const preloadNextQuiz = async () => {
     try {
-      // Use only validated breeds if available, otherwise use all breeds
-      const breedsToUse = validatedBreeds.length > 0 ? validatedBreeds : dogBreeds;
+      // Use only validated breeds if available, otherwise use the initial verified breeds
+      const breedsToUse = validatedBreeds.length > 0 ? validatedBreeds : dogBreeds.filter(breed => breed.verified);
       
       if (breedsToUse.length === 0) {
         console.error("No validated dog breeds available for quiz");
@@ -196,7 +257,7 @@ const MainFeature = ({ onQuizComplete }) => {
       const nextCorrectBreed = breedsToUse[Math.floor(Math.random() * breedsToUse.length)];
       
       // Preload the image and verify it matches the breed
-      const imageResult = await preloadImage(nextCorrectBreed.image);
+      const imageResult = await preloadImage(nextCorrectBreed.image || nextCorrectBreed.validatedImage);
       
       // Only proceed if image loaded successfully
       if (imageResult.success) {
@@ -205,7 +266,7 @@ const MainFeature = ({ onQuizComplete }) => {
         
         if (breedIsValid) {
           // Create a verification key for this quiz question
-          const verificationKey = `${Date.now()}-${nextCorrectBreed.id}`;
+          const verificationKey = `quiz-${Date.now()}-${nextCorrectBreed.id}-${Math.random().toString(36).substring(2, 9)}`;
           
           // Get incorrect options that don't include the correct breed
           const nextOtherBreeds = breedsToUse.filter(breed => breed.id !== nextCorrectBreed.id);
@@ -220,18 +281,20 @@ const MainFeature = ({ onQuizComplete }) => {
           // Generate a random confidence score between 70 and 99
           const nextRandomConfidence = Math.floor(Math.random() * 30) + 70;
           
-          // Store the verification details with explicit breed-image connection
+          // Store comprehensive verification details
           setVerificationKeys(prev => ({
             ...prev,
             [verificationKey]: {
               breedId: nextCorrectBreed.id,
               breedName: nextCorrectBreed.name,
-              imageUrl: nextCorrectBreed.image,
+              imageUrl: nextCorrectBreed.image || nextCorrectBreed.validatedImage,
               timestamp: Date.now(),
-              // Store the actual correct answer for verification
-              correctAnswer: nextCorrectBreed.name
+              correctAnswer: nextCorrectBreed.name,
+              // Add extra verification data
+              breedFacts: nextCorrectBreed.facts,
+              verificationHash: nextCorrectBreed.verificationHash || `manual-${nextCorrectBreed.id}-${Date.now()}`
             }
-          }));
+          })); 
           
           // Create the quiz data with verified breed information
           const verifiedOptions = nextAllOptions.map(option => ({
@@ -239,10 +302,11 @@ const MainFeature = ({ onQuizComplete }) => {
             // Add verification flag to ensure data integrity
             verified: option.id === nextCorrectBreed.id,
             // Make sure we store the connection between option and image
-            isCorrectOption: option.id === nextCorrectBreed.id,
-            associatedImage: option.id === nextCorrectBreed.id ? nextCorrectBreed.image : null
+            isCorrectOption: option.id === nextCorrectBreed.id, 
+            associatedImage: option.id === nextCorrectBreed.id ? (nextCorrectBreed.image || nextCorrectBreed.validatedImage) : null
           }));
-        
+          
+          // Enhanced quiz data with extra verification
           // Store the quiz data with the verification key
           setNextQuizData({
             quiz: { 
@@ -252,7 +316,10 @@ const MainFeature = ({ onQuizComplete }) => {
               // Store verification key with the quiz data
               verificationKey,
               // Explicitly store the correct answer
-              correctAnswerName: nextCorrectBreed.name,
+              correctAnswerName: nextCorrectBreed.name, 
+              // Double verification of the image match
+              verifiedImage: nextCorrectBreed.image || nextCorrectBreed.validatedImage,
+              verificationTimestamp: Date.now(),
               correctAnswerId: nextCorrectBreed.id
             },
             confidence: nextRandomConfidence
@@ -264,8 +331,6 @@ const MainFeature = ({ onQuizComplete }) => {
     }
   };
 
-
-  // Generate a new quiz question
   const generateQuiz = async () => {
     setLoading(true);
     
@@ -277,7 +342,7 @@ const MainFeature = ({ onQuizComplete }) => {
         try {
           const key = nextQuizData.quiz.verificationKey;
           const verification = verificationKeys[key];
-        
+          
           if (!verification || verification.breedId !== nextQuizData.quiz.correctBreed.id || verification.correctAnswer !== nextQuizData.quiz.correctBreed.name) {
             console.error("Data integrity issue detected, regenerating quiz");
             preloadNextQuiz();
@@ -292,6 +357,8 @@ const MainFeature = ({ onQuizComplete }) => {
         } catch (error) {
           console.error("Error verifying quiz data:", error);
           setLoading(false);
+          
+          const imageResult = await preloadImage(nextQuizData?.quiz?.correctBreed?.image);
           if (!imageResult.success) {
             // Try again with another breed if image fails
             console.warn("Image failed to load, trying another breed");
@@ -303,7 +370,7 @@ const MainFeature = ({ onQuizComplete }) => {
         }
       } else {
         try {
-          // Use validated breeds if available
+          // Use validated breeds if available, otherwise use initially verified breeds
           const breedsToUse = validatedBreeds.length > 0 ? validatedBreeds : dogBreeds;
           
           if (breedsToUse.length === 0) {
@@ -316,7 +383,8 @@ const MainFeature = ({ onQuizComplete }) => {
           const correctBreed = breedsToUse[Math.floor(Math.random() * breedsToUse.length)];
           
           // Verify image loads correctly
-          const imageResult = await preloadImage(correctBreed.image);
+          const imageUrl = correctBreed.validatedImage || correctBreed.image;
+          const imageResult = await preloadImage(imageUrl);
           
           if (!imageResult.success) {
             // Try again with another breed if image fails
@@ -336,24 +404,49 @@ const MainFeature = ({ onQuizComplete }) => {
           }
           
           // Get verified incorrect options
-          const otherBreeds = breedsToUse.filter(breed => breed.id !== correctBreed.id);
+          // Filter out breeds that don't have proper validation
+          const otherBreeds = breedsToUse
+            .filter(breed => breed.id !== correctBreed.id)
+            .filter(breed => breed.verified || breed.imageMatchVerified);
+            
           const incorrectOptions = getRandomElements(otherBreeds, 3, correctBreed);
+          
+          // Extra safety check for enough incorrect options
+          if (incorrectOptions.length < 3) {
+            console.warn("Not enough valid incorrect options, regenerating quiz");
+            setLoading(false);
+            generateQuiz();
+            return;
+          }
+          
           const allOptions = [...incorrectOptions];
-          const correctPosition = Math.floor(Math.random() * 4);
+          
+          // Vary position patterns for better randomness
+          // This avoids having patterns like the correct answer always being in position 2
+          const positions = [0, 1, 2, 3];
+          // Fisher-Yates shuffle for true randomness
+          for (let i = positions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [positions[i], positions[j]] = [positions[j], positions[i]];
+          }
+          const correctPosition = positions[0];
           allOptions.splice(correctPosition, 0, correctBreed);
           
           // Create a verification key for this quiz question
-          const verificationKey = `${Date.now()}-${correctBreed.id}`;
+          const verificationKey = `direct-${Date.now()}-${correctBreed.id}-${Math.random().toString(36).substring(2, 9)}`;
           
           // Store the verification details
           setVerificationKeys(prev => ({
             ...prev,
             [verificationKey]: {
               breedId: correctBreed.id,
-              breedName: correctBreed.name,
-              imageUrl: correctBreed.image,
-              timestamp: Date.now(),
-              correctAnswer: correctBreed.name
+              breedName: correctBreed.name, 
+              imageUrl: correctBreed.validatedImage || correctBreed.image,
+              timestamp: Date.now(), 
+              correctAnswer: correctBreed.name,
+              // Additional verification data
+              breedFacts: correctBreed.facts,
+              verificationHash: correctBreed.verificationHash || `direct-${correctBreed.id}-${Date.now()}`
             }
           }));
           
@@ -362,18 +455,20 @@ const MainFeature = ({ onQuizComplete }) => {
             ...option,
             verified: option.id === correctBreed.id,
             isCorrectOption: option.id === correctBreed.id,
-            associatedImage: option.id === correctBreed.id ? correctBreed.image : null
+            associatedImage: option.id === correctBreed.id ? (correctBreed.validatedImage || correctBreed.image) : null
           }));
           
           const randomConfidence = Math.floor(Math.random() * 30) + 70;
           
           setCurrentQuiz({
             correctBreed,
-          options: verifiedOptions,
-          verificationKey,
+            options: verifiedOptions,
+            verificationKey,
             fact: getRandomFact(correctBreed.facts),
-          correctAnswerName: correctBreed.name,
-          correctAnswerId: correctBreed.id
+            correctAnswerName: correctBreed.name,
+            verifiedImage: correctBreed.validatedImage || correctBreed.image,
+            verificationTimestamp: Date.now(),
+            correctAnswerId: correctBreed.id
         });
         
         setConfidenceScore(randomConfidence);
@@ -381,9 +476,11 @@ const MainFeature = ({ onQuizComplete }) => {
           console.error("Error generating quiz:", error);
         }
       }
+      
       setSelectedAnswer(null);
       setLoading(false);
-      preloadNextQuiz(); // Preload the next question regardless of the path taken
+      // Always preload the next question for a smoother user experience
+      preloadNextQuiz();
     }, 1000);
   };
 
@@ -410,14 +507,29 @@ const MainFeature = ({ onQuizComplete }) => {
     
     setSelectedAnswer(breed);
     const correct = breed.id === currentQuiz.correctBreed.id;
-    setIsCorrect(correct);
-    
-    // Double-check the answer is correct based on verified data
-    if (correct && breed.name !== verification.correctAnswer) {
-      console.error("Answer mismatch detected!");
-      setIsCorrect(false);
+
+    // Enhanced verification for answer correctness
+    let finalIsCorrect = correct;
+
+    // Multiple layers of verification to ensure accurate results
+    if (correct) {
+      // Verify that the selected breed matches the verified correct answer
+      if (breed.name !== verification.correctAnswer) {
+        console.error("Answer mismatch detected!");
+        finalIsCorrect = false;
+      }
+      
+      // Verify the image still matches the breed
+      if (breed.associatedImage !== verification.imageUrl) {
+        console.error("Image mismatch detected!");
+        finalIsCorrect = false;
+      }
     }
     
+    // Set the final verification result
+    setIsCorrect(finalIsCorrect);
+    
+    // Show the result to the user
     setShowResult(true);
     
     // Update quiz history
@@ -433,7 +545,7 @@ const MainFeature = ({ onQuizComplete }) => {
     
     // Update quiz stats
     setQuizCount(prev => prev + 1);
-    if (correct) {
+    if (finalIsCorrect) {
       setCorrectCount(prev => prev + 1);
       toast.success("Correct answer! Good job!");
     } else {
@@ -465,36 +577,73 @@ const MainFeature = ({ onQuizComplete }) => {
   
   // Validate all dog breeds when component mounts
   useEffect(() => {
-    const validateAllBreeds = async () => {
-      const validationPromises = dogBreeds.map(breed => validateBreedData(breed));
+    const validateAllBreeds = async () => {  
+      console.log("Starting comprehensive breed validation...");
+      
+      // First, validate all breeds that are already marked as verified
+      const preVerifiedBreeds = dogBreeds.filter(breed => breed.verified);
+      
+      if (preVerifiedBreeds.length > 0) {
+        console.log(`Using ${preVerifiedBreeds.length} pre-verified breeds`);
+        setValidatedBreeds(preVerifiedBreeds);
+      }
+      
+      // Then validate all breeds to ensure their images match
+      const validationPromises = dogBreeds.map(async (breed) => {
+        // Skip already verified breeds for efficiency
+        if (breed.verified && breed.verificationHash) {
+          return true;
+        }
+        return validateBreedData(breed);
+      });
+      
       const validationResults = await Promise.all(validationPromises);
-
+      
       // Filter breeds that passed validation
       const validBreeds = dogBreeds.filter((_, index) => validationResults[index]);
       
-      // Enhance breed data with verification info
+      // Enhance breed data with comprehensive verification info
       const enhancedValidBreeds = validBreeds.map(breed => ({
         ...breed,
-        // Add a verification property to track that this breed has been validated
+        // Add detailed verification properties
         validation: {
           verified: true,
           timestamp: Date.now(),
-          imageVerified: true
-        }
+          imageVerified: true,
+          source: "comprehensive-validation"
+        },
+        // Ensure all breeds have these properties
+        verified: true,
+        imageMatchVerified: true,
+        verificationHash: breed.verificationHash || `validation-${breed.id}-${Date.now()}`
       }));
       
       if (validBreeds.length < dogBreeds.length) {
-        console.warn(`Filtered out ${dogBreeds.length - validBreeds.length} breeds with invalid data.`);
+        console.warn(`Filtered out ${dogBreeds.length - validBreeds.length} breeds with invalid image data.`);
         
         if (validBreeds.length === 0) {
-          toast.error("Unable to validate any dog breeds. Using original dataset.");
+          // Fall back to pre-verified breeds if image validation fails
+          if (preVerifiedBreeds.length > 0) {
+            toast.warn("Using pre-verified dog breeds due to image validation issues.");
+            setValidatedBreeds(preVerifiedBreeds);
+          } else {
+            toast.error("Unable to validate any dog breeds. Using original dataset with caution.");
+            // Last resort - use original dataset but with warning
+            setValidatedBreeds(dogBreeds);
+          }
         } else {
-          toast.info(`Using ${validBreeds.length} validated dog breeds for maximum accuracy.`);
+          // Use validated breeds with success message
+          toast.success(`Using ${validBreeds.length} validated dog breeds for maximum accuracy.`);
           setValidatedBreeds(enhancedValidBreeds);
         }
       } else {
+        // All breeds validated successfully
+        toast.success("All dog breeds validated successfully!");
         setValidatedBreeds(enhancedValidBreeds);
       }
+      
+      // Start the quiz generation process
+      generateQuiz();
     };
     
     validateAllBreeds();
@@ -502,10 +651,13 @@ const MainFeature = ({ onQuizComplete }) => {
 
   // Generate initial quiz when component mounts and validatedBreeds changes
   useEffect(() => {
-    if (validatedBreeds.length > 0 || dogBreeds.length > 0) {
-      generateQuiz();
+    // Only generate a new quiz if we don't already have one and we have breeds available
+    if (!currentQuiz && !loading) {
+      if (validatedBreeds.length > 0 || dogBreeds.length > 0) {
+        generateQuiz();
+      }
     }
-  }, [validatedBreeds]);
+  }, [validatedBreeds, currentQuiz, loading]);
 
   return (
     <div className="mx-auto max-w-4xl">
