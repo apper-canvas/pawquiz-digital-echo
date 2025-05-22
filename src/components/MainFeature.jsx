@@ -593,16 +593,136 @@ const additionalBreeds = [
 // Combine the original breeds with additional breeds
 const allDogBreeds = [...dogBreeds, ...additionalBreeds];
 
+// List of real dog breed names to use instead of "Breed X"
+const realDogBreedNames = [
+  "Affenpinscher",
+  "American Bulldog",
+  "American Eskimo Dog",
+  "American Foxhound",
+  "American Pit Bull Terrier",
+  "American Staffordshire Terrier",
+  "American Water Spaniel",
+  "Anatolian Shepherd Dog",
+  "Australian Cattle Dog",
+  "Australian Kelpie",
+  "Australian Terrier",
+  "Basenji",
+  "Basset Fauve de Bretagne",
+  "Bearded Collie",
+  "Beauceron",
+  "Bedlington Terrier",
+  "Belgian Malinois",
+  "Belgian Sheepdog",
+  "Belgian Tervuren",
+  "Berger Picard",
+  "Bichon Frise",
+  "Black and Tan Coonhound",
+  "Black Russian Terrier",
+  "Bloodhound",
+  "Bluetick Coonhound",
+  "Boerboel",
+  "Bolognese",
+  "Border Terrier",
+  "Borzoi",
+  "Boston Terrier",
+  "Bouvier des Flandres",
+  "Boykin Spaniel",
+  "Bracco Italiano",
+  "Briard",
+  "Brussels Griffon",
+  "Bull Terrier",
+  "Bullmastiff",
+  "Cairn Terrier",
+  "Canaan Dog",
+  "Cane Corso",
+  "Cardigan Welsh Corgi",
+  "Catahoula Leopard Dog",
+  "Cavalier King Charles Spaniel",
+  "Cesky Terrier",
+  "Chesapeake Bay Retriever",
+  "Chihuahua",
+  "Chinese Crested",
+  "Chinese Shar-Pei",
+  "Chinook",
+  "Chow Chow",
+  "Clumber Spaniel",
+  "Cocker Spaniel",
+  "Collie",
+  "Coton de Tulear",
+  "Curly-Coated Retriever",
+  "Dachshund",
+  "Dalmatian",
+  "Dandie Dinmont Terrier",
+  "Doberman Pinscher",
+  "Dogo Argentino",
+  "Dutch Shepherd",
+  "English Cocker Spaniel",
+  "English Foxhound",
+  "English Setter",
+  "English Springer Spaniel",
+  "English Toy Spaniel",
+  "Entlebucher Mountain Dog",
+  "Field Spaniel",
+  "Finnish Lapphund",
+  "Finnish Spitz",
+  "Flat-Coated Retriever",
+  "Fox Terrier",
+  "French Bulldog",
+  "German Pinscher",
+  "German Shepherd Dog",
+  "German Shorthaired Pointer",
+  "German Wirehaired Pointer",
+  "Giant Schnauzer",
+  "Glen of Imaal Terrier",
+  "Golden Retriever",
+  "Gordon Setter",
+  "Great Dane",
+  "Great Pyrenees",
+  "Greater Swiss Mountain Dog",
+  "Greyhound",
+  "Harrier",
+  "Havanese",
+  "Ibizan Hound",
+  "Icelandic Sheepdog",
+  "Irish Red and White Setter",
+  "Irish Setter",
+  "Irish Terrier",
+  "Irish Water Spaniel",
+  "Irish Wolfhound",
+  "Italian Greyhound",
+  "Japanese Chin",
+  "Keeshond",
+  "Kerry Blue Terrier",
+  "Komondor",
+  "Kuvasz",
+  "Labrador Retriever",
+  "Lakeland Terrier",
+  "Leonberger",
+  "Lhasa Apso",
+  "Löwchen",
+  "Maltese",
+  "Manchester Terrier",
+  "Mastiff",
+  "Miniature Schnauzer",
+  "Neapolitan Mastiff",
+  "Norfolk Terrier",
+  "Norwegian Buhund",
+  "Norwegian Elkhound",
+  "Norwegian Lundehund"
+];
+
 // Complete the array with more breeds to reach 150 total
 for (let i = allDogBreeds.length + 1; i <= 150; i++) {
+  // Get an index to pick a real breed name from our list
+  const nameIndex = (i - allDogBreeds.length - 1) % realDogBreedNames.length;
   allDogBreeds.push({
     id: `breed-${i}`,
-    name: `Breed ${i}`,
+    name: realDogBreedNames[nameIndex],
     image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=600",
     facts: [
-      `Interesting fact 1 about breed ${i}.`,
-      `Interesting fact 2 about breed ${i}.`,
-      `Interesting fact 3 about breed ${i}.`
+      `Interesting fact 1 about the ${realDogBreedNames[nameIndex]}.`,
+      `Interesting fact 2 about the ${realDogBreedNames[nameIndex]}.`,
+      `Interesting fact 3 about the ${realDogBreedNames[nameIndex]}.`
     ],
     verified: true
   });
@@ -926,16 +1046,6 @@ const MainFeature = ({ onQuizComplete }) => {
         } catch (error) {
           console.error("Error verifying quiz data:", error);
           setLoading(false);
-          
-          const imageResult = await preloadImage(imageUrl, correctBreed.name);
-          if (!imageResult.success) {
-            // Try again with another breed if image fails
-            console.warn("Image failed to load, trying another breed");
-            setLoading(false);
-            generateQuiz();
-            return;
-          }
-          
         }
       } else {
         try {
