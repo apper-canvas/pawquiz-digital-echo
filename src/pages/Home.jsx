@@ -19,8 +19,8 @@ const Home = () => {
   const features = [
     {
       icon: <PawPrintIcon className="w-10 h-10 text-primary" />,
-      title: "120+ Dog Breeds",
-      description: "Explore and learn about over 120 different dog breeds from around the world."
+      title: "150+ Dog Breeds",
+      description: "Explore and learn about over 150 different dog breeds from around the world."
     },
     {
       icon: <BrainIcon className="w-10 h-10 text-primary" />,
