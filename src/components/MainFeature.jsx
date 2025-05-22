@@ -903,6 +903,7 @@ const MainFeature = ({ onQuizComplete }) => {
   const [verificationKeys, setVerificationKeys] = useState({});
   const [usedBreedIds, setUsedBreedIds] = useState(new Set());
   const [wrongAnswerPool, setWrongAnswerPool] = useState([]);
+  const [recentlyShownBreeds, setRecentlyShownBreeds] = useState([]);
 
   // Preload the next quiz question
   const preloadNextQuiz = async () => {
@@ -918,6 +919,11 @@ const MainFeature = ({ onQuizComplete }) => {
       // Filter out breeds that have already been used to avoid repetition
       const unusedBreeds = breedsToUse.filter(breed => !usedBreedIds.has(breed.id));
       
+      // Additionally filter out breeds that were recently shown to prevent immediate repetition
+      const nonRepeatingBreeds = unusedBreeds.filter(
+        breed => !recentlyShownBreeds.includes(breed.id)
+      );
+      
       // If we've used most breeds, reset the used breeds to allow a new cycle
       let breedPool = unusedBreeds;
       if (unusedBreeds.length < 10) {
@@ -925,8 +931,15 @@ const MainFeature = ({ onQuizComplete }) => {
         setUsedBreedIds(new Set());
         breedPool = breedsToUse;
       }
+
+      // Use non-repeating breeds if we have enough, otherwise use the regular pool
+      if (nonRepeatingBreeds.length >= 4) {
+        breedPool = nonRepeatingBreeds;
+      }
       
-      // Get a random breed for the next question that hasn't been used before
+      // Get a random breed for the next question that hasn't been used recently
+      // Filter out the most recently shown breed to prevent immediate repetition
+      breedPool = breedPool.filter(breed => !recentlyShownBreeds.includes(breed.id));
       const nextCorrectBreed = breedPool[Math.floor(Math.random() * breedPool.length)];
       
       // Preload the image and verify it matches the breed
@@ -940,6 +953,12 @@ const MainFeature = ({ onQuizComplete }) => {
         if (breedIsValid) {
           // Add this breed to the used breeds set to avoid repetition
           setUsedBreedIds(prevUsed => new Set([...prevUsed, nextCorrectBreed.id]));
+
+          // Add to recently shown breeds queue and maintain queue size
+          setRecentlyShownBreeds(prev => {
+            const updated = [nextCorrectBreed.id, ...prev].slice(0, 5);
+            return updated;
+          });
           
           // Create a verification key for this quiz question
           const verificationKey = `quiz-${Date.now()}-${nextCorrectBreed.id}-${Math.random().toString(36).substring(2, 9)}`;
@@ -1061,8 +1080,13 @@ const MainFeature = ({ onQuizComplete }) => {
           // Filter out breeds that have already been used to avoid repetition
           const unusedBreeds = breedsToUse.filter(breed => !usedBreedIds.has(breed.id));
           
+          // Additionally filter out breeds that were recently shown
+          const nonRepeatingBreeds = unusedBreeds.filter(
+            breed => !recentlyShownBreeds.includes(breed.id)
+          );
+          
           // If we've used most breeds, reset the used breeds to allow a new cycle
-          let breedPool = unusedBreeds;
+          let breedPool = nonRepeatingBreeds.length >= 4 ? nonRepeatingBreeds : unusedBreeds;
           if (unusedBreeds.length < 10) {
             console.log("Resetting used breeds pool to allow new cycle");
             setUsedBreedIds(new Set());
@@ -1074,6 +1098,12 @@ const MainFeature = ({ onQuizComplete }) => {
           
           // Add this breed to the used breeds set to avoid repetition
           setUsedBreedIds(prevUsed => new Set([...prevUsed, correctBreed.id]));
+          
+          // Add to recently shown breeds queue and maintain queue size
+          setRecentlyShownBreeds(prev => {
+            const updated = [correctBreed.id, ...prev].slice(0, 5);
+            return updated;
+          });
           
           // Verify image loads correctly
           const imageUrl = correctBreed.validatedImage || correctBreed.image;
@@ -1294,6 +1324,8 @@ const MainFeature = ({ onQuizComplete }) => {
     setQuizHistory([]);
     // Reset the used breeds to start fresh
     setUsedBreedIds(new Set());
+    // Reset the recently shown breeds queue
+    setRecentlyShownBreeds([]);
     toast.info("Quiz session completed! Your stats have been updated.");
     generateQuiz();
     
