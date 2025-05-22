@@ -1026,9 +1026,6 @@ const MainFeature = ({ onQuizComplete }) => {
       }
     } catch (error) {
       console.error("Error in preloading next quiz:", error);
-      // Silently handle the error to prevent app crashes
-    } catch (error) {
-      console.error("Error in preloading next quiz:", error);
     }
   };
 
@@ -1084,7 +1081,6 @@ const MainFeature = ({ onQuizComplete }) => {
             console.log("Resetting used breeds pool to allow new cycle");
             setUsedBreedIds(new Set());
             // Reset to all available breeds
-            breedPool = breedsToUse;
             breedPool = breedsToUse;
           }
           
