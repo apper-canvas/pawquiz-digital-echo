@@ -390,12 +390,11 @@ const dogBreeds = [
     id: "weimaraner-35",
     name: "Weimaraner",
     image: "https://images.unsplash.com/photo-1549619856-ac562a3ed1a3?auto=format&fit=crop&q=80&w=600",
-    image: "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Weimaraners were originally bred for hunting large game like bears and wolves.",
       "They're nicknamed 'the Gray Ghost' due to their distinctive silver-gray coat.",
       "The breed was created exclusively for the nobility of the Weimar Republic in Germany."
-    image: "https://images.unsplash.com/photo-1549619856-ac562a3ed1a3?auto=format&fit=crop&q=80&w=600",
+    ],
     verified: true
   },
   {
@@ -551,6 +550,7 @@ const dogBreeds = [
       "The famous Akita named Hachiko waited for his deceased owner at a train station every day for nine years until his own death."
     ],
     verified: true
+  },
   {
     id: "bernese-50",
     name: "Bernese Mountain Dog",
