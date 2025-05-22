@@ -11,7 +11,7 @@ const InfoIcon = getIcon('info');
 const BarChart3Icon = getIcon('bar-chart-3');
 
 // Mock dog breed data for our quiz
-const dogBreeds = [ 
+const dogBreeds = [
   {
     id: "lab-01",
     name: "Labrador Retriever",
@@ -232,20 +232,6 @@ const dogBreeds = [
     ],
     verified: true
   },
-  {
-    id: "akita-21",
-    name: "Akita",
-    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600",
-    facts: [
-      "Akitas are ancient Japanese dogs that were originally used for hunting bears.",
-      "In Japan, they're symbols of good health, happiness, and long life.",
-      "Helen Keller received the first Akita brought to America as a gift during a visit to Japan in 1937."
-    ],
-    verified: true
-  },
-  {
-    id: "newfoundland-22",
-    name: "Newfoundland",
     image: "https://images.unsplash.com/photo-1560392290-a86bca8a8783?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Newfoundlands have webbed feet and a water-resistant coat, making them excellent swimmers.",
@@ -254,6 +240,9 @@ const dogBreeds = [
     ],
     verified: true
   },
+  {
+    id: "newfoundland-22",
+    name: "Newfoundland",
   {
     id: "saint-23",
     name: "Saint Bernard",
@@ -727,6 +716,168 @@ for (let i = allDogBreeds.length + 1; i <= 150; i++) {
     verified: true
   });
 }
+const additionalBreeds = [
+  {
+    id: "afghan-51",
+    name: "Afghan Hound",
+    image: "https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?auto=format&fit=crop&q=80&w=600",
+    facts: [
+      "Afghan Hounds are one of the oldest dog breeds, dating back thousands of years.",
+      "Their long, flowing coat was developed for protection in the harsh mountain climates of Afghanistan.",
+      "Despite their elegant appearance, they were bred as hunting dogs with excellent sight and speed."
+    ],
+    verified: true
+  },
+  {
+    id: "bloodhound-52",
+    name: "Bloodhound",
+    image: "https://images.unsplash.com/photo-1550942545-8ffc5a89a94c?auto=format&fit=crop&q=80&w=600",
+    facts: [
+      "Bloodhounds have the most sensitive sense of smell of any dog breed, with 300 million scent receptors.",
+      "Their evidence is admissible in court in many jurisdictions.",
+      "They can follow a scent trail that's over 300 hours old."
+    ],
+    verified: true
+  }
+];
+
+// Combine the original breeds with additional breeds
+const allDogBreeds = [...dogBreeds, ...additionalBreeds];
+
+// List of real dog breed names to use instead of "Breed X"
+const realDogBreedNames = [
+  "Affenpinscher",
+  "American Bulldog",
+  "American Eskimo Dog",
+  "American Foxhound",
+  "American Pit Bull Terrier",
+  "American Staffordshire Terrier",
+  "American Water Spaniel",
+  "Anatolian Shepherd Dog",
+  "Australian Cattle Dog",
+  "Australian Kelpie",
+  "Australian Terrier",
+  "Basenji",
+  "Basset Fauve de Bretagne",
+  "Bearded Collie",
+  "Beauceron",
+  "Bedlington Terrier",
+  "Belgian Malinois",
+  "Belgian Sheepdog",
+  "Belgian Tervuren",
+  "Berger Picard",
+  "Bichon Frise",
+  "Black and Tan Coonhound",
+  "Black Russian Terrier",
+  "Bloodhound",
+  "Bluetick Coonhound",
+  "Boerboel",
+  "Bolognese",
+  "Border Terrier",
+  "Borzoi",
+  "Boston Terrier",
+  "Bouvier des Flandres",
+  "Boykin Spaniel",
+  "Bracco Italiano",
+  "Briard",
+  "Brussels Griffon",
+  "Bull Terrier",
+  "Bullmastiff",
+  "Cairn Terrier",
+  "Canaan Dog",
+  "Cane Corso",
+  "Cardigan Welsh Corgi",
+  "Catahoula Leopard Dog",
+  "Cavalier King Charles Spaniel",
+  "Cesky Terrier",
+  "Chesapeake Bay Retriever",
+  "Chihuahua",
+  "Chinese Crested",
+  "Chinese Shar-Pei",
+  "Chinook",
+  "Chow Chow",
+  "Clumber Spaniel",
+  "Cocker Spaniel",
+  "Collie",
+  "Coton de Tulear",
+  "Curly-Coated Retriever",
+  "Dachshund",
+  "Dalmatian",
+  "Dandie Dinmont Terrier",
+  "Doberman Pinscher",
+  "Dogo Argentino",
+  "Dutch Shepherd",
+  "English Cocker Spaniel",
+  "English Foxhound",
+  "English Setter",
+  "English Springer Spaniel",
+  "English Toy Spaniel",
+  "Entlebucher Mountain Dog",
+  "Field Spaniel",
+  "Finnish Lapphund",
+  "Finnish Spitz",
+  "Flat-Coated Retriever",
+  "Fox Terrier",
+  "French Bulldog",
+  "German Pinscher",
+  "German Shepherd Dog",
+  "German Shorthaired Pointer",
+  "German Wirehaired Pointer",
+  "Giant Schnauzer",
+  "Glen of Imaal Terrier",
+  "Golden Retriever",
+  "Gordon Setter",
+  "Great Dane",
+  "Great Pyrenees",
+  "Greater Swiss Mountain Dog",
+  "Greyhound",
+  "Harrier",
+  "Havanese",
+  "Ibizan Hound",
+  "Icelandic Sheepdog",
+  "Irish Red and White Setter",
+  "Irish Setter",
+  "Irish Terrier",
+  "Irish Water Spaniel",
+  "Irish Wolfhound",
+  "Italian Greyhound",
+  "Japanese Chin",
+  "Keeshond",
+  "Kerry Blue Terrier",
+  "Komondor",
+  "Kuvasz",
+  "Labrador Retriever",
+  "Lakeland Terrier",
+  "Leonberger",
+  "Lhasa Apso",
+  "Löwchen",
+  "Maltese",
+  "Manchester Terrier",
+  "Mastiff",
+  "Miniature Schnauzer",
+  "Neapolitan Mastiff",
+  "Norfolk Terrier",
+  "Norwegian Buhund",
+  "Norwegian Elkhound",
+  "Norwegian Lundehund"
+];
+
+// Complete the array with more breeds to reach 150 total
+for (let i = allDogBreeds.length + 1; i <= 150; i++) {
+  // Get an index to pick a real breed name from our list
+  const nameIndex = (i - allDogBreeds.length - 1) % realDogBreedNames.length;
+  allDogBreeds.push({
+    id: `breed-${i}`,
+    name: realDogBreedNames[nameIndex],
+    image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=600",
+    facts: [
+      `Interesting fact 1 about the ${realDogBreedNames[nameIndex]}.`,
+      `Interesting fact 2 about the ${realDogBreedNames[nameIndex]}.`,
+      `Interesting fact 3 about the ${realDogBreedNames[nameIndex]}.`
+    ],
+    verified: true
+  });
+}
 
 // Helper function to get random elements from an array
 const getRandomElements = (array, count, exclude = null) => {
@@ -904,6 +1055,7 @@ const MainFeature = ({ onQuizComplete }) => {
   const [usedBreedIds, setUsedBreedIds] = useState(new Set());
   const [wrongAnswerPool, setWrongAnswerPool] = useState([]);
   const [recentlyShownBreeds, setRecentlyShownBreeds] = useState([]);
+  const [recentlyShownBreeds, setRecentlyShownBreeds] = useState([]);
 
   // Preload the next quiz question
   const preloadNextQuiz = async () => {
@@ -924,6 +1076,23 @@ const MainFeature = ({ onQuizComplete }) => {
         breed => !recentlyShownBreeds.includes(breed.id)
       );
       
+      // Additionally filter out breeds that were recently shown to prevent immediate repetition
+      let breedPool = unusedBreeds;
+      if (unusedBreeds.length < 10) {
+        console.log("Resetting used breeds pool to allow new cycle");
+        setUsedBreedIds(new Set());
+        breedPool = breedsToUse;
+      }
+
+      // Use non-repeating breeds if we have enough, otherwise use the regular pool
+      if (nonRepeatingBreeds.length >= 4) {
+        breedPool = nonRepeatingBreeds;
+      }
+        breed => !recentlyShownBreeds.includes(breed.id)
+      // Get a random breed for the next question that hasn't been used recently
+      // Filter out the most recently shown breed to prevent immediate repetition
+      breedPool = breedPool.filter(breed => !recentlyShownBreeds.includes(breed.id));
+      const nextCorrectBreed = breedPool[Math.floor(Math.random() * breedPool.length)];
       // If we've used most breeds, reset the used breeds to allow a new cycle
       let breedPool = unusedBreeds;
       if (unusedBreeds.length < 10) {
@@ -943,6 +1112,13 @@ const MainFeature = ({ onQuizComplete }) => {
       const nextCorrectBreed = breedPool[Math.floor(Math.random() * breedPool.length)];
       
       // Preload the image and verify it matches the breed
+          // Add to recently shown breeds queue and maintain queue size
+          setRecentlyShownBreeds(prev => {
+            const updated = [nextCorrectBreed.id, ...prev].slice(0, 5);
+            return updated;
+          });
+          
+          // Create a verification key for this quiz question
       const imageResult = await preloadImage(nextCorrectBreed.image || nextCorrectBreed.validatedImage, nextCorrectBreed.name);
       
       // Only proceed if image loaded successfully
@@ -1085,10 +1261,26 @@ const MainFeature = ({ onQuizComplete }) => {
             breed => !recentlyShownBreeds.includes(breed.id)
           );
           
+          // Additionally filter out breeds that were recently shown
+          let breedPool = nonRepeatingBreeds.length >= 4 ? nonRepeatingBreeds : unusedBreeds;
+          if (unusedBreeds.length < 10) {
+            console.log("Resetting used breeds pool to allow new cycle");
+            setUsedBreedIds(new Set());
+            breedPool = breedsToUse;
+          }
+            breed => !recentlyShownBreeds.includes(breed.id)
+          );
+          
           // If we've used most breeds, reset the used breeds to allow a new cycle
           let breedPool = nonRepeatingBreeds.length >= 4 ? nonRepeatingBreeds : unusedBreeds;
           if (unusedBreeds.length < 10) {
             console.log("Resetting used breeds pool to allow new cycle");
+          // Add to recently shown breeds queue and maintain queue size
+          setRecentlyShownBreeds(prev => {
+            const updated = [correctBreed.id, ...prev].slice(0, 5);
+            return updated;
+          });
+          
             setUsedBreedIds(new Set());
             breedPool = breedsToUse;
           }
@@ -1324,6 +1516,8 @@ const MainFeature = ({ onQuizComplete }) => {
     setQuizHistory([]);
     // Reset the used breeds to start fresh
     setUsedBreedIds(new Set());
+    // Reset the recently shown breeds queue
+    setRecentlyShownBreeds([]);
     // Reset the recently shown breeds queue
     setRecentlyShownBreeds([]);
     toast.info("Quiz session completed! Your stats have been updated.");
