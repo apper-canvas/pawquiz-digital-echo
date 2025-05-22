@@ -245,15 +245,16 @@ const dogBreeds = [
   },
   {
     id: "newfoundland-22",
-    name: "Newfoundland",
-    image: "https://images.unsplash.com/photo-1560392290-a86bca8a8783?auto=format&fit=crop&q=80&w=600",
+    name: "Norwegian Elkhound",
+    image: "https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=600",
     facts: [
-      "Newfoundlands have webbed feet and a water-resistant coat, making them excellent swimmers.",
-      "They were bred as working dogs for fishermen in Newfoundland, Canada.",
-      "They're known for their natural lifesaving abilities and have been known to save people from drowning."
+      "Norwegian Elkhounds are ancient Viking dogs used for hunting and guarding.",
+      "Their dense silver-gray coat was developed to withstand the harsh Scandinavian winters.",
+      "Despite their name, they were primarily used to hunt moose rather than elk."
     ],
     verified: true
   },
+  
   {
     id: "stbernard-23",
     name: "Saint Bernard",
@@ -347,11 +348,11 @@ const dogBreeds = [
     name: "Saint Bernard",
     image: "https://images.unsplash.com/photo-1561363702-e07252da3399?auto=format&fit=crop&q=80&w=600",
     facts: [
-      "Saint Bernards can weigh up to 180 pounds, making them one of the heaviest dog breeds.",
-      "They were named after the Great St. Bernard Pass in the Swiss Alps.",
-      "Their keen sense of smell allows them to detect humans buried under snow."
+      "Saint Bernards have distinctive markings with rust-colored patches over a white coat.",
+      "They're known for their calm and patient temperament, making them excellent family dogs.",
+      "Modern Saint Bernards are heavier than their ancestors, often weighing up to 180 pounds."
     ],
-    verified: true
+    verified: true  
   },
   {
     id: "mastiff-32",
@@ -393,7 +394,7 @@ const dogBreeds = [
     facts: [
       "Weimaraners were originally bred for hunting large game like bears and wolves.",
       "They're nicknamed 'the Gray Ghost' due to their distinctive silver-gray coat.",
-      "The breed was created exclusively for the nobility of the weimar republic in germany."
+      "The breed was created exclusively for the nobility of the Weimar Republic in Germany."
     ],
     verified: true
   },
