@@ -235,7 +235,7 @@ const dogBreeds = [
   {
     id: "akita-21",
     name: "Akita",
-    image: "https://images.unsplash.com/photo-1603131825939-7c4e17d7b59f?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Akitas are ancient Japanese dogs that were originally used for hunting bears.",
       "In Japan, they're symbols of good health, happiness, and long life.",
@@ -323,7 +323,7 @@ const dogBreeds = [
   {
     id: "frenchie-29",
     name: "French Bulldog",
-    image: "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1583337626439-a1d8f14c3768?auto=format&fit=crop&q=80&w=600",
     facts: [
       "French Bulldogs were developed in England as miniature Bulldogs before becoming popular in France.",
       "Their bat-like ears are one of their most distinctive features.",
@@ -345,7 +345,7 @@ const dogBreeds = [
   {
     id: "stbernard-31",
     name: "Saint Bernard",
-    image: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1561363702-e07252da3399?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Saint Bernards can weigh up to 180 pounds, making them one of the heaviest dog breeds.",
       "They were named after the Great St. Bernard Pass in the Swiss Alps.",
@@ -389,7 +389,7 @@ const dogBreeds = [
   {
     id: "weimaraner-35",
     name: "Weimaraner",
-    image: "https://images.unsplash.com/photo-1549619856-ac562a3ed1a3?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1543916389-2bc671eacd2d?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Weimaraners were originally bred for hunting large game like bears and wolves.",
       "They're nicknamed 'the Gray Ghost' due to their distinctive silver-gray coat.",
@@ -422,7 +422,7 @@ const dogBreeds = [
   {
     id: "brittany-38",
     name: "Brittany",
-    image: "https://images.unsplash.com/photo-1591946614720-90a587da4a36?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1628956518028-f4026f783598?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Brittanys were developed in the Brittany region of France in the 17th century.",
       "They're often called Brittany Spaniels, though they're more closely related to setters than spaniels.",
@@ -543,7 +543,7 @@ const dogBreeds = [
   {
     id: "akitas-49",
     name: "Akita Inu",
-    image: "https://images.unsplash.com/photo-1526250295387-a9b93f39eb53?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Akitas originated in the mountains of northern Japan.",
       "In Japan, they're considered symbols of good health, happiness, and long life.",
@@ -569,7 +569,7 @@ const additionalBreeds = [
   {
     id: "afghan-51",
     name: "Afghan Hound",
-    image: "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Afghan Hounds are one of the oldest dog breeds, dating back thousands of years.",
       "Their long, flowing coat was developed for protection in the harsh mountain climates of Afghanistan.",
@@ -598,7 +598,7 @@ for (let i = allDogBreeds.length + 1; i <= 150; i++) {
   allDogBreeds.push({
     id: `breed-${i}`,
     name: `Breed ${i}`,
-    image: `https://images.unsplash.com/photo-${1550000000000 + i}?auto=format&fit=crop&q=80&w=600`,
+    image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=600",
     facts: [
       `Interesting fact 1 about breed ${i}.`,
       `Interesting fact 2 about breed ${i}.`,
