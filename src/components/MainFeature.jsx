@@ -223,10 +223,10 @@ const dogBreeds = [
   },
   {
     id: "pit-20",
-    name: "Pit Bull",
+    name: "American Pit Bull Terrier",
     image: "https://images.unsplash.com/photo-1598983872322-f9f4299253cd?auto=format&fit=crop&q=80&w=600",
     facts: [
-      "Pit Bulls were originally bred in England for bull-baiting, a blood sport.",
+      "American Pit Bull Terriers were originally bred in England for bull-baiting, a blood sport.",
       "In the early 20th century, they were known as 'nanny dogs' due to their gentle nature with children.",
       "Pit Bulls score better than many breeds on temperament tests, showing less aggression than breeds like Chihuahuas and Dachshunds."
     ],
@@ -346,14 +346,14 @@ const dogBreeds = [
   {
     id: "stbernard-31",
     name: "Saint Bernard",
-    image: "https://images.unsplash.com/photo-1561363702-e07252da3399?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1567752881298-894bb81f9379?auto=format&fit=crop&q=80&w=600",
     facts: [
-      "Saint Bernards have distinctive markings with rust-colored patches over a white coat.",
-      "They're known for their calm and patient temperament, making them excellent family dogs.",
-      "Modern Saint Bernards are heavier than their ancestors, often weighing up to 180 pounds."
+      "Saint Bernards are known for their massive size, with males weighing up to 180 pounds.",
+      "They have a keen sense of smell and can detect humans buried under snow.",
+      "Despite their size, they're exceptionally gentle and patient with children."
     ],
     verified: true  
-  },
+  }, 
   {
     id: "mastiff-32",
     name: "English Mastiff",
