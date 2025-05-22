@@ -389,12 +389,12 @@ const dogBreeds = [
   {
     id: "weimaraner-35",
     name: "Weimaraner",
+    image: "https://images.unsplash.com/photo-1549619856-ac562a3ed1a3?auto=format&fit=crop&q=80&w=600",
     image: "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Weimaraners were originally bred for hunting large game like bears and wolves.",
       "They're nicknamed 'the Gray Ghost' due to their distinctive silver-gray coat.",
       "The breed was created exclusively for the nobility of the Weimar Republic in Germany."
-    ],
     image: "https://images.unsplash.com/photo-1549619856-ac562a3ed1a3?auto=format&fit=crop&q=80&w=600",
     verified: true
   },
@@ -428,6 +428,7 @@ const dogBreeds = [
       "Brittanys were developed in the Brittany region of France in the 17th century.",
       "They're often called Brittany Spaniels, though they're more closely related to setters than spaniels.",
       "Brittanys are known for their high energy and exceptional hunting abilities."
+    ],
     verified: true
   },
   {
@@ -480,7 +481,6 @@ const dogBreeds = [
     image: "https://images.unsplash.com/photo-1592754345493-e41e8be9488c?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Great Danes were originally bred to hunt wild boar.",
-      "Great Danes were originally bred to hunt wild boar.",
       "Despite their name, they were developed in Germany, not Denmark.",
       "The term 'apartment-friendly' was never used to describe Great Danes, yet they're known for being relatively inactive indoors."
     ],
@@ -503,7 +503,6 @@ const dogBreeds = [
     image: "https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Irish Wolfhounds are one of the tallest dog breeds in the world.",
-      "They were originally bred to hunt wolves in Ireland, hence their name.",
       "They were originally bred to hunt wolves in Ireland, hence their name.",
       "Despite their imposing size, they're known for their gentle, friendly temperament."
     ],
@@ -545,14 +544,13 @@ const dogBreeds = [
   {
     id: "akitas-49",
     name: "Akita Inu",
-    image: "https://images.unsplash.com/photo-1544568784-9cd5635b6194?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1583512603805-3cc6b41e3362?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Akitas originated in the mountains of northern Japan.",
       "In Japan, they're considered symbols of good health, happiness, and long life.",
       "The famous Akita named Hachiko waited for his deceased owner at a train station every day for nine years until his own death."
     ],
     verified: true
-    image: "https://images.unsplash.com/photo-1583512603805-3cc6b41e3362?auto=format&fit=crop&q=80&w=600",
   {
     id: "bernese-50",
     name: "Bernese Mountain Dog",
