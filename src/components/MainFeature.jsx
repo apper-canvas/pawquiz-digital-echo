@@ -105,6 +105,16 @@ const getRandomFact = (facts) => {
   return facts[Math.floor(Math.random() * facts.length)];
 };
 
+// Helper function to preload an image
+const preloadImage = (src) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(src);
+    img.onerror = reject;
+    img.src = src;
+  });
+};
+
 const MainFeature = ({ onQuizComplete }) => {
   const [currentQuiz, setCurrentQuiz] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -116,6 +126,33 @@ const MainFeature = ({ onQuizComplete }) => {
   const [quizCount, setQuizCount] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [nextQuizData, setNextQuizData] = useState(null);
+
+  // Preload the next quiz question
+  const preloadNextQuiz = () => {
+    // Get a random breed for the next question
+    const nextCorrectBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)];
+    
+    // Get incorrect options that don't include the correct breed
+    const nextOtherBreeds = dogBreeds.filter(breed => breed.id !== nextCorrectBreed.id);
+    const nextIncorrectOptions = getRandomElements(nextOtherBreeds, 3);
+    
+    // Create all options with the correct one inserted at a random position
+    const nextAllOptions = [...nextIncorrectOptions];
+    const nextCorrectPosition = Math.floor(Math.random() * 4);
+    nextAllOptions.splice(nextCorrectPosition, 0, nextCorrectBreed);
+    
+    // Generate a random confidence score between 70 and 99
+    const nextRandomConfidence = Math.floor(Math.random() * 30) + 70;
+    
+    // Preload the image
+    preloadImage(nextCorrectBreed.image).then(() => {
+      setNextQuizData({
+        quiz: { correctBreed: nextCorrectBreed, options: nextAllOptions, fact: getRandomFact(nextCorrectBreed.facts) },
+        confidence: nextRandomConfidence
+      });
+    });
+  };
 
   // Generate a new quiz question
   const generateQuiz = () => {
@@ -123,31 +160,39 @@ const MainFeature = ({ onQuizComplete }) => {
     
     // Simulate API/model loading time
     setTimeout(() => {
-      const correctBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)];
-      
-      // Get 3 incorrect options that don't include the correct breed
-      const otherBreeds = dogBreeds.filter(breed => breed.id !== correctBreed.id);
-      const incorrectOptions = getRandomElements(otherBreeds, 3);
-      
-      // Create all options with the correct one inserted at a random position
-      const allOptions = [...incorrectOptions];
-      const correctPosition = Math.floor(Math.random() * 4);
-      allOptions.splice(correctPosition, 0, correctBreed);
-      
-      // Generate a random confidence score between 70 and 99
-      const randomConfidence = Math.floor(Math.random() * 30) + 70;
-      
-      setCurrentQuiz({
-        correctBreed,
-        options: allOptions,
-        fact: getRandomFact(correctBreed.facts)
-      });
-      
-      setConfidenceScore(randomConfidence);
+      if (nextQuizData) {
+        // Use the preloaded quiz data
+        setCurrentQuiz(nextQuizData.quiz);
+        setConfidenceScore(nextQuizData.confidence);
+        setNextQuizData(null);
+        // Preload the next question for after this one
+        preloadNextQuiz();
+      } else {
+        // If no preloaded data exists, generate a new quiz
+        const correctBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)];
+        
+        // Get 3 incorrect options that don't include the correct breed
+        const otherBreeds = dogBreeds.filter(breed => breed.id !== correctBreed.id);
+        const incorrectOptions = getRandomElements(otherBreeds, 3);
+        
+        // Create all options with the correct one inserted at a random position
+        const allOptions = [...incorrectOptions];
+        const correctPosition = Math.floor(Math.random() * 4);
+        allOptions.splice(correctPosition, 0, correctBreed);
+        
+        // Generate a random confidence score between 70 and 99
+        const randomConfidence = Math.floor(Math.random() * 30) + 70;
+        
+        setCurrentQuiz({
+          correctBreed,
+          options: allOptions,
+          fact: getRandomFact(correctBreed.facts)
+        });
+        
+        setConfidenceScore(randomConfidence);
+        preloadNextQuiz();
+      }
       setSelectedAnswer(null);
-      setIsCorrect(null);
-      setShowResult(false);
-      setQuizCompleted(false);
       setLoading(false);
     }, 1000);
   };
@@ -185,6 +230,9 @@ const MainFeature = ({ onQuizComplete }) => {
 
   // Start a new quiz after completing the current one
   const handleNextQuiz = () => {
+    setIsCorrect(null);
+    setShowResult(false);
+    setQuizCompleted(false);
     generateQuiz();
   };
 
@@ -203,6 +251,7 @@ const MainFeature = ({ onQuizComplete }) => {
   // Generate initial quiz on component mount
   useEffect(() => {
     generateQuiz();
+    preloadNextQuiz();
   }, []);
 
   return (
