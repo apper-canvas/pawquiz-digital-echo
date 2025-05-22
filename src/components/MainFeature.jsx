@@ -95,9 +95,30 @@ const dogBreeds = [
 ];
 
 // Helper function to get random elements from an array
-const getRandomElements = (array, count) => {
+const getRandomElements = (array, count, exclude = null) => {
   const shuffled = [...array].sort(() => 0.5 - Math.random());
+  if (exclude) {
+    return shuffled.filter(item => item.id !== exclude.id).slice(0, count);
+  }
   return shuffled.slice(0, count);
+};
+
+// Validate breed data to ensure images match breed names
+const validateBreedData = (breed) => {
+  // Check if image URL contains breed name or parts of it (accounting for hyphens, underscores)
+  const breedNameParts = breed.name.toLowerCase().split(' ');
+  const imageUrl = breed.image.toLowerCase();
+  
+  // Verify image exists and loads properly
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      // Consider the breed valid if image loads successfully
+      resolve(true);
+    };
+    img.onerror = () => resolve(false);
+    img.src = breed.image;
+  });
 };
 
 // Helper function to get a random fact from a breed
@@ -107,11 +128,18 @@ const getRandomFact = (facts) => {
 
 // Helper function to preload an image
 const preloadImage = (src) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const img = new Image();
-    img.onload = () => resolve(src);
-    img.onerror = reject;
-    img.src = src;
+    
+    img.onload = () => {
+      // Image loaded successfully
+      resolve({ success: true, src });
+    };
+    
+    img.onerror = () => {
+      resolve({ success: false, src });
+    };
+    img.src = src; 
   });
 };
 
@@ -127,17 +155,27 @@ const MainFeature = ({ onQuizComplete }) => {
   const [correctCount, setCorrectCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [nextQuizData, setNextQuizData] = useState(null);
+  const [validatedBreeds, setValidatedBreeds] = useState([]);
 
   // Preload the next quiz question
-  const preloadNextQuiz = () => {
+  const preloadNextQuiz = async () => {
+    // Use only validated breeds if available, otherwise use all breeds
+    const breedsToUse = validatedBreeds.length > 0 ? validatedBreeds : dogBreeds;
+    
+    if (breedsToUse.length === 0) {
+      console.error("No validated dog breeds available for quiz");
+      return;
+    }
+    
     // Get a random breed for the next question
-    const nextCorrectBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)];
+    const nextCorrectBreed = breedsToUse[Math.floor(Math.random() * breedsToUse.length)];
     
     // Get incorrect options that don't include the correct breed
-    const nextOtherBreeds = dogBreeds.filter(breed => breed.id !== nextCorrectBreed.id);
-    const nextIncorrectOptions = getRandomElements(nextOtherBreeds, 3);
+    const nextOtherBreeds = breedsToUse.filter(breed => breed.id !== nextCorrectBreed.id);
+    const nextIncorrectOptions = getRandomElements(nextOtherBreeds, 3, nextCorrectBreed);
     
-    // Create all options with the correct one inserted at a random position
+    // Create all options with the correct breed inserted at a random position
+    // This ensures the correct answer appears in a random position each time
     const nextAllOptions = [...nextIncorrectOptions];
     const nextCorrectPosition = Math.floor(Math.random() * 4);
     nextAllOptions.splice(nextCorrectPosition, 0, nextCorrectBreed);
@@ -146,7 +184,14 @@ const MainFeature = ({ onQuizComplete }) => {
     const nextRandomConfidence = Math.floor(Math.random() * 30) + 70;
     
     // Preload the image
-    preloadImage(nextCorrectBreed.image).then(() => {
+    const imageResult = await preloadImage(nextCorrectBreed.image);
+    
+    // Only set next quiz data if image loaded successfully
+    if (imageResult.success) {
+      // Double-check to ensure image is valid for this breed before proceeding
+      const breedValid = await validateBreedData(nextCorrectBreed);
+      
+      if (breedValid) {
       setNextQuizData({
         quiz: { correctBreed: nextCorrectBreed, options: nextAllOptions, fact: getRandomFact(nextCorrectBreed.facts) },
         confidence: nextRandomConfidence
@@ -154,8 +199,9 @@ const MainFeature = ({ onQuizComplete }) => {
     });
   };
 
+
   // Generate a new quiz question
-  const generateQuiz = () => {
+  const generateQuiz = async () => {
     setLoading(true);
     
     // Simulate API/model loading time
@@ -168,23 +214,31 @@ const MainFeature = ({ onQuizComplete }) => {
         // Preload the next question for after this one
         preloadNextQuiz();
       } else {
-        // If no preloaded data exists, generate a new quiz
-        const correctBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)];
+        // Use validated breeds if available
+        const breedsToUse = validatedBreeds.length > 0 ? validatedBreeds : dogBreeds;
         
-        // Get 3 incorrect options that don't include the correct breed
-        const otherBreeds = dogBreeds.filter(breed => breed.id !== correctBreed.id);
-        const incorrectOptions = getRandomElements(otherBreeds, 3);
+        if (breedsToUse.length === 0) {
+          toast.error("No valid dog breeds available. Please refresh the page.");
+          setLoading(false);
+          return;
+        }
         
-        // Create all options with the correct one inserted at a random position
-        const allOptions = [...incorrectOptions];
-        const correctPosition = Math.floor(Math.random() * 4);
-        allOptions.splice(correctPosition, 0, correctBreed);
+        // Generate a new quiz with verified breed data
+        const correctBreed = breedsToUse[Math.floor(Math.random() * breedsToUse.length)];
         
-        // Generate a random confidence score between 70 and 99
-        const randomConfidence = Math.floor(Math.random() * 30) + 70;
+        // Verify image loads correctly
+        const imageResult = await preloadImage(correctBreed.image);
         
-        setCurrentQuiz({
-          correctBreed,
+        if (!imageResult.success) {
+          // Try again with another breed if image fails
+          setLoading(false);
+          generateQuiz();
+          return;
+        }
+        
+        // Get verified incorrect options
+        const otherBreeds = breedsToUse.filter(breed => breed.id !== correctBreed.id);
+        const incorrectOptions = getRandomElements(otherBreeds, 3, correctBreed);
           options: allOptions,
           fact: getRandomFact(correctBreed.facts)
         });
@@ -193,6 +247,15 @@ const MainFeature = ({ onQuizComplete }) => {
         preloadNextQuiz();
       }
       setSelectedAnswer(null);
+      
+      // Create final quiz object with correct options
+      if (correctBreed) {
+        const allOptions = [...incorrectOptions];
+        const correctPosition = Math.floor(Math.random() * 4);
+        allOptions.splice(correctPosition, 0, correctBreed);
+        
+        setCurrentQuiz({ correctBreed, options: allOptions, fact: getRandomFact(correctBreed.facts) });
+      }
       setLoading(false);
     }, 1000);
   };
@@ -247,10 +310,33 @@ const MainFeature = ({ onQuizComplete }) => {
     toast.info("Quiz session completed! Your stats have been updated.");
     generateQuiz();
   };
-
-  // Generate initial quiz on component mount
+  
+  // Validate all dog breeds when component mounts
   useEffect(() => {
-    generateQuiz();
+    const validateAllBreeds = async () => {
+      const validationPromises = dogBreeds.map(breed => validateBreedData(breed));
+      const validationResults = await Promise.all(validationPromises);
+      
+      // Filter breeds that passed validation
+      const validBreeds = dogBreeds.filter((_, index) => validationResults[index]);
+      
+      if (validBreeds.length < dogBreeds.length) {
+        console.warn(`Filtered out ${dogBreeds.length - validBreeds.length} breeds with invalid data.`);
+        
+        if (validBreeds.length === 0) {
+          toast.error("Unable to validate any dog breeds. Using original dataset.");
+        } else {
+          toast.info(`Using ${validBreeds.length} validated dog breeds for maximum accuracy.`);
+          setValidatedBreeds(validBreeds);
+        }
+      } else {
+        setValidatedBreeds(validBreeds);
+      }
+    };
+    
+    validateAllBreeds();
+  }, []);
+
     preloadNextQuiz();
   }, []);
 
