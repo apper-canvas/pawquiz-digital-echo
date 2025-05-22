@@ -323,7 +323,7 @@ const dogBreeds = [
   {
     id: "frenchie-29",
     name: "French Bulldog",
-    image: "https://images.unsplash.com/photo-1575425186775-b8de9a427e67?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dd8?auto=format&fit=crop&q=80&w=600",
     facts: [
       "French Bulldogs were developed in England as miniature Bulldogs before becoming popular in France.",
       "Their bat-like ears are one of their most distinctive features.",
@@ -393,7 +393,7 @@ const dogBreeds = [
     facts: [
       "Weimaraners were originally bred for hunting large game like bears and wolves.",
       "They're nicknamed 'the Gray Ghost' due to their distinctive silver-gray coat.",
-      "The breed was created exclusively for the nobility of the Weimar Republic in Germany."
+      "The breed was created exclusively for the nobility of the weimar republic in germany."
     ],
     verified: true
   },
@@ -543,7 +543,7 @@ const dogBreeds = [
   {
     id: "akitas-49",
     name: "Akita Inu",
-    image: "https://images.unsplash.com/photo-1583512603805-3cc6b41e3362?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1478098711619-5ab0b478d6dc?auto=format&fit=crop&q=80&w=600",
     facts: [
       "Akitas originated in the mountains of northern Japan.",
       "In Japan, they're considered symbols of good health, happiness, and long life.",
